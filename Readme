@@ -1,0 +1,9 @@
+http://localhost:9010/api/v1/roles?createdAt=["2019-03-07 17: 35: 44", "2019-03-19 16: 31: 54"]
+
+http://localhost:9010/api/v1/roles?status=[preEnabled,enabled]
+
+http://localhost:9010/api/v1/roles?name=*好多*
+
+http://localhost:9010/api/v1/roles?uuid=afe9d695e4ce43e39fd43a
+
+http://localhost:9010/api/v1/roles?id=[12,13]

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.0.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.vendor</groupId>
+	<artifactId>role-server</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>role-server</name>
+	<description>roleserver project for Spring Boot</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.vladmihalcea</groupId>
+			<artifactId>hibernate-types-5</artifactId>
+			<version>2.4.2</version>
+		</dependency>
+
+
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+
+				<configuration>
+				<fork>true</fork>
+				<!-- spring-boot:run 中文乱码解决 -->
+				<jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
+				</configuration>
+
+			</plugin>
+
+			<plugin>
+				<groupId>com.github.stadler</groupId>
+				<artifactId>hibernate-tools-maven-plugin</artifactId>
+				<version>0.1.1</version>
+				<executions>
+					<execution>
+						<id>Entity generation</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>hbm2java</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!--模板路径，如果有定制模板，需要指定-->
+					<!--<templatePath>${project.basedir}/src/main/resources</templatePath>-->
+					<!-- Defaults: -->
+					<outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+					<!-- Hibernate数据库连接属性文件 -->
+					<configFile>src/main/resources/hibernate.xml</configFile>
+					<!-- 反转规则配置文件，不是必须的 -->
+					<!--<revengFile>src/main/resources/reveng.xml</revengFile>-->
+					<!-- 生成实体类默认包 -->
+					<packageName>com.vendor.entity</packageName>
+					<detectManyToMany>true</detectManyToMany>
+					<detectOneToOne>true</detectOneToOne>
+					<detectOptimisticLock>true</detectOptimisticLock>
+					<createCollectionForForeignKey>true</createCollectionForForeignKey>
+					<createManyToOneForForeignKey>true</createManyToOneForForeignKey>
+					<!-- 如果设置为true则生成JPA注解，若设置为false则生成hbml.xml -->
+					<ejb3>true</ejb3>
+					<jdk5>true</jdk5>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>5.1.46</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>
